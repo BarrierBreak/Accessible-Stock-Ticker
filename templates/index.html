@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Ticker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 90%; /* Adjusted width for responsiveness */
+            max-width: 400px; /* Added max-width */
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            color: black;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #DC7726; /* border color */
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23DC7726"><path d="M7 10l5 5 5-5z" /></svg>'); /* custom arrow */
+            background-repeat: no-repeat;
+            background-position: right 8px top 50%;
+            background-size: 18px;
+            -webkit-appearance: none; /* for Safari */
+            -moz-appearance: none; /* for Firefox */
+        }
+
+        button:focus, select:focus {
+            outline: none;
+            border: 2px solid black;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        button#watch-now,
+        button#stop-watching {
+            background-color: #DC7726;
+            color: white;
+        }
+
+        button#watch-now:hover,
+        button#stop-watching:hover {
+            background-color: #b66420;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #DC7726; /* border color */
+        }
+
+        .price {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .arrow {
+            font-size: 20px;
+            margin-left: 10px;
+        }
+
+        .arrow.green {
+            color: #DC7726; /* color */
+        }
+
+        .arrow.red {
+            color: red;
+        }
+
+        /* Media Queries */
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 90%;
+                max-width: none;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .container {
+                width: 100%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stock Ticker</h1>
+        <div>
+            <label for="stock-select">Select a stock to receive live percentage updates</label>
+            <select id="stock-select">
+                {% for symbol in symbols %}
+                    <option value="{{ symbol }}">{{ symbol }}</option>
+                {% endfor %}
+            </select>
+            <button id="watch-now">Watch Now</button>
+            <button id="stop-watching">Stop Watching</button>
+        </div>
+        <ul id="stock-list">
+            {% for symbol in symbols %}
+                <li id="{{ symbol }}" data-old-price="0">
+                    <span class="symbol" hidden>{{ symbol }}</span>
+                    <span class="price">No previous data available</span>
+                    <span class="arrow"></span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        document.getElementById('watch-now').addEventListener('click', function() {
+            const selectedSymbol = document.getElementById('stock-select').value;
+            const selectedPrice = parseFloat(document.getElementById(selectedSymbol).dataset.oldPrice || 0);
+            updatePriceAnnouncement(selectedSymbol, selectedPrice);
+        });
+
+        document.getElementById('stop-watching').addEventListener('click', function() {
+            const selectedSymbol = document.getElementById('stock-select').value;
+            removePriceAnnouncement(selectedSymbol);
+        });
+
+        function updatePriceAnnouncement(symbol, price) {
+            const listItem = document.getElementById(symbol);
+            const symbolName = listItem.querySelector('.symbol').textContent;
+            const priceElement = listItem.querySelector('.price');
+            const arrowElement = listItem.querySelector('.arrow');
+            const oldPrice = parseFloat(priceElement.dataset.oldPrice || 0);
+
+            const priceChange = price - oldPrice;
+            const percentageChange = ((priceChange / oldPrice) * 100).toFixed(2);
+
+            if (oldPrice !== 0) {
+                priceElement.textContent = `${symbolName}: $${price.toFixed(2)} (${percentageChange}%)`;
+
+                if (priceChange > 0) {
+                    arrowElement.textContent = '⬆';
+                    arrowElement.style.color = 'green';
+                } else if (priceChange < 0) {
+                    arrowElement.textContent = '⬇';
+                    arrowElement.style.color = 'red';
+                } else {
+                    arrowElement.textContent = '';
+                }
+            } else {
+                priceElement.textContent = `${symbolName}: No previous data available`;
+            }
+
+            priceElement.setAttribute('aria-live', 'polite');
+            priceElement.setAttribute('role', 'status');
+        }
+
+        function removePriceAnnouncement(symbol) {
+            const priceElement = document.getElementById(symbol).querySelector('.price');
+            const arrowElement = document.getElementById(symbol).querySelector('.arrow');
+            priceElement.removeAttribute('aria-live');
+            priceElement.removeAttribute('role');
+            arrowElement.textContent = '';
+        }
+
+        function updatePrices() {
+            fetch('/prices')
+                .then(response => response.json())
+                .then(data => {
+                    for (const [symbol, price] of Object.entries(data)) {
+                        const listItem = document.getElementById(symbol);
+                        const symbolName = listItem.querySelector('.symbol').textContent;
+                        const priceElement = listItem.querySelector('.price');
+                        const arrowElement = listItem.querySelector('.arrow');
+                        const oldPrice = parseFloat(priceElement.dataset.oldPrice || 0);
+
+                        const priceChange = price - oldPrice;
+                        const percentageChange = ((priceChange / oldPrice) * 100).toFixed(2);
+
+                        if (oldPrice !== 0) {
+                            priceElement.textContent = `${symbolName}: $${price.toFixed(2)} (${percentageChange}%)`;
+
+                            if (priceChange > 0) {
+                                arrowElement.textContent = '⬆';
+                                arrowElement.style.color = 'green';
+                            } else if (priceChange < 0) {
+                                arrowElement.textContent = '⬇';
+                                arrowElement.style.color = 'red';
+                            } else {
+                                arrowElement.textContent = '';
+                            }
+                        } else {
+                            priceElement.textContent = `${symbolName}: No previous data available`;
+                        }
+
+                        priceElement.dataset.oldPrice = price;
+                    }
+                });
+        }
+        setInterval(updatePrices, 5000);
+        updatePrices(); // Initial update
+    </script>
+</body>
+</html>
