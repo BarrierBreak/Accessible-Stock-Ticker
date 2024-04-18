@@ -4,248 +4,200 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Ticker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        .stock-info {
+            display: inline-block;
+            margin-right: 20px;
         }
 
-        .container {
-            width: 90%; /* Adjusted width for responsiveness */
-            max-width: 400px; /* Added max-width */
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            padding: 30px;
+        .up-arrow {
+            color: green;
         }
 
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-size: 16px;
-            color: black;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #DC7726; /* border color */
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            text-align: center;
-            appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23DC7726"><path d="M7 10l5 5 5-5z" /></svg>'); /* custom arrow */
-            background-repeat: no-repeat;
-            background-position: right 8px top 50%;
-            background-size: 18px;
-            -webkit-appearance: none; /* for Safari */
-            -moz-appearance: none; /* for Firefox */
-        }
-
-        button:focus, select:focus {
-            outline: none;
-            border: 2px solid black;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-size: 18px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-
-        button#watch-now,
-        button#stop-watching {
-            background-color: #DC7726;
-            color: white;
-        }
-
-        button#watch-now:hover,
-        button#stop-watching:hover {
-            background-color: #b66420;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #DC7726; /* border color */
-        }
-
-        .price {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .arrow {
-            font-size: 20px;
-            margin-left: 10px;
-        }
-
-        .arrow.green {
-            color: #DC7726; /* color */
-        }
-
-        .arrow.red {
+        .down-arrow {
             color: red;
         }
-
-        /* Media Queries */
-        @media screen and (max-width: 768px) {
-            .container {
-                width: 90%;
-                max-width: none;
-            }
+        #announceBtn:focus {
+            border: 2px solid black;
         }
-
-        @media screen and (max-width: 480px) {
-            .container {
-                width: 100%;
-                padding: 20px;
-            }
+        #notAnnounceBtn:focus {
+            border: 2px solid black;
+        }
+        #setPoliteBtn:focus {
+            border: 2px solid black;
+        }
+        .container{
+            text-align: center;
+        }
+        #stock-ticker{
+            padding: 3%;
+        }
+        .stock-ticker-list{
+            display: inline-flex;
+        }
+        ul {
+            list-style-type: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+
+    <div class="container mt-5">
         <h1>Stock Ticker</h1>
-        <div>
-            <label for="stock-select">Select a stock to receive live percentage updates</label>
-            <select id="stock-select">
-                {% for symbol in symbols %}
-                    <option value="{{ symbol }}">{{ symbol }}</option>
-                {% endfor %}
-            </select>
-            <button id="watch-now">Watch Now</button>
-            <button id="stop-watching">Stop Watching</button>
-        </div>
-        <ul id="stock-list">
-            {% for symbol in symbols %}
-                <li id="{{ symbol }}" data-old-price="0">
-                    <span class="symbol" hidden>{{ symbol }}</span>
-                    <span class="price">No previous data available</span>
-                    <span class="arrow"></span>
+        <div id="stock-ticker">
+            <ul class="stock-ticker-list">
+                <li>
+                    <div id="nifty-bank" class="stock-info">Nifty-bank: 35000</div>
                 </li>
-            {% endfor %}
-        </ul>
+                <li>
+                    <div id="sensex" class="stock-info">Sensex: 50000</div>
+                </li>
+                <li>
+                    <div id="nifty-50" class="stock-info">Nifty-50: 15000</div>
+                </li>
+            </ul>
+        </div>
+    
+        <div class="mt-4">
+            <ul class="stock-ticker-list">
+                <li>
+                    <button id="announceBtn" class="btn btn-primary me-2">
+                        Announce
+                        <span id="announceText" class="visually-hidden">Selected</span>
+                    </button>
+                </li>
+                <li> 
+                    <button id="setPoliteBtn" class="btn btn-info me-2">
+                        Set Polite
+                        <span id="setPoliteText" class="visually-hidden">Selected</span>
+                    </button>
+                </li>
+                <li>
+                    <button id="notAnnounceBtn" class="btn btn-secondary me-2">
+                        Not Announce
+                        <span id="notAnnounceText" class="visually-hidden">Selected</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    
+        <!-- ARIA live region for screen reader announcements -->
+        <div id="announcement" class="mt-3 visually-hidden"></div>
     </div>
 
-    <script>
-        document.getElementById('watch-now').addEventListener('click', function() {
-            const selectedSymbol = document.getElementById('stock-select').value;
-            const selectedPrice = parseFloat(document.getElementById(selectedSymbol).dataset.oldPrice || 0);
-            updatePriceAnnouncement(selectedSymbol, selectedPrice);
-        });
+<script>
+    const niftyBank = document.getElementById('nifty-bank');
+    const sensex = document.getElementById('sensex');
+    const nifty50 = document.getElementById('nifty-50');
+    const announceBtn = document.getElementById('announceBtn');
+    const notAnnounceBtn = document.getElementById('notAnnounceBtn');
+    const setPoliteBtn = document.getElementById('setPoliteBtn');
+    let announce = true; // Flag to track announcement state
 
-        document.getElementById('stop-watching').addEventListener('click', function() {
-            const selectedSymbol = document.getElementById('stock-select').value;
-            removePriceAnnouncement(selectedSymbol);
-        });
+    function updateButtonText(button, selected) {
+        const hiddenText = button.querySelector('.visually-hidden');
+        hiddenText.textContent = selected ? 'Selected' : '';
+    }
 
-        function updatePriceAnnouncement(symbol, price) {
-            const listItem = document.getElementById(symbol);
-            const symbolName = listItem.querySelector('.symbol').textContent;
-            const priceElement = listItem.querySelector('.price');
-            const arrowElement = listItem.querySelector('.arrow');
-            const oldPrice = parseFloat(priceElement.dataset.oldPrice || 0);
 
-            const priceChange = price - oldPrice;
-            const percentageChange = ((priceChange / oldPrice) * 100).toFixed(2);
+    let prevNiftyBank, prevSensex, prevNifty50;
 
-            if (oldPrice !== 0) {
-                priceElement.textContent = `${symbolName}: $${price.toFixed(2)} (${percentageChange}%)`;
+    function updateTicker() {
+        fetch('/get_data')
+            .then(response => response.json())
+            .then(data => {
+                const currentIndex = Math.floor(Date.now() / 5000) % data.length;
+                const currentData = data[currentIndex];
 
-                if (priceChange > 0) {
-                    arrowElement.textContent = '⬆';
-                    arrowElement.style.color = 'green';
-                } else if (priceChange < 0) {
-                    arrowElement.textContent = '⬇';
-                    arrowElement.style.color = 'red';
-                } else {
-                    arrowElement.textContent = '';
+                const arrowNiftyBank = getArrowAndChange(prevNiftyBank, currentData.nifty_bank, 'nifty-bank');
+                const arrowSensex = getArrowAndChange(prevSensex, currentData.sensex, 'sensex');
+                const arrowNifty50 = getArrowAndChange(prevNifty50, currentData.nifty_50, 'nifty-50');
+
+                if (announce) {
+                    announceStockValues(currentData, arrowNiftyBank, arrowSensex, arrowNifty50);
                 }
-            } else {
-                priceElement.textContent = `${symbolName}: No previous data available`;
-            }
 
-            priceElement.setAttribute('aria-live', 'polite');
-            priceElement.setAttribute('role', 'status');
+                prevNiftyBank = currentData.nifty_bank;
+                prevSensex = currentData.sensex;
+                prevNifty50 = currentData.nifty_50;
+            });
+    }
+
+    function announceStockValues(data, arrowNiftyBank, arrowSensex, arrowNifty50) {
+        let announcement = '';
+        if (arrowNiftyBank.change === 'Increasing') {
+            announcement += ` Nifty Bank ${data.nifty_bank} ${arrowNiftyBank.percentChange}% `;
+        } else if (arrowNiftyBank.change === 'Decreasing') {
+            announcement += ` Nifty Bank ${data.nifty_bank} ${arrowNiftyBank.percentChange}% `;
         }
 
-        function removePriceAnnouncement(symbol) {
-            const priceElement = document.getElementById(symbol).querySelector('.price');
-            const arrowElement = document.getElementById(symbol).querySelector('.arrow');
-            priceElement.removeAttribute('aria-live');
-            priceElement.removeAttribute('role');
-            arrowElement.textContent = '';
+        if (arrowSensex.change === 'Increasing') {
+            announcement += ` Sensex ${data.sensex} ${arrowSensex.percentChange}% `;
+        } else if (arrowSensex.change === 'Decreasing') {
+            announcement += ` Sensex ${data.sensex} ${arrowSensex.percentChange}% `;
         }
 
-        function updatePrices() {
-            fetch('/prices')
-                .then(response => response.json())
-                .then(data => {
-                    for (const [symbol, price] of Object.entries(data)) {
-                        const listItem = document.getElementById(symbol);
-                        const symbolName = listItem.querySelector('.symbol').textContent;
-                        const priceElement = listItem.querySelector('.price');
-                        const arrowElement = listItem.querySelector('.arrow');
-                        const oldPrice = parseFloat(priceElement.dataset.oldPrice || 0);
-
-                        const priceChange = price - oldPrice;
-                        const percentageChange = ((priceChange / oldPrice) * 100).toFixed(2);
-
-                        if (oldPrice !== 0) {
-                            priceElement.textContent = `${symbolName}: $${price.toFixed(2)} (${percentageChange}%)`;
-
-                            if (priceChange > 0) {
-                                arrowElement.textContent = '⬆';
-                                arrowElement.style.color = 'green';
-                            } else if (priceChange < 0) {
-                                arrowElement.textContent = '⬇';
-                                arrowElement.style.color = 'red';
-                            } else {
-                                arrowElement.textContent = '';
-                            }
-                        } else {
-                            priceElement.textContent = `${symbolName}: No previous data available`;
-                        }
-
-                        priceElement.dataset.oldPrice = price;
-                    }
-                });
+        if (arrowNifty50.change === 'Increasing') {
+            announcement += ` Nifty 50 ${data.nifty_50} ${arrowNifty50.percentChange}% `;
+        } else if (arrowNifty50.change === 'Decreasing') {
+            announcement += ` Nifty 50 ${data.nifty_50} ${arrowNifty50.percentChange}% `;
         }
-        setInterval(updatePrices, 5000);
-        updatePrices(); // Initial update
-    </script>
+
+        document.getElementById('announcement').textContent = announcement.trim();
+    }
+
+    function getArrowAndChange(prevValue, newValue, id) {
+        if (prevValue === undefined || newValue === prevValue) {
+            return { arrow: '', change: 'No change', percentChange: 0 };
+        }
+
+        const percentChange = ((newValue - prevValue) / prevValue * 100).toFixed(2);
+        const arrow = newValue > prevValue ? '<span aria-hidden="true" class="up-arrow">&#x25B2;</span>' : '<span aria-hidden="true" class="down-arrow">&#x25BC;</span>';
+        const change = newValue > prevValue ? 'Increasing' : 'Decreasing';
+        document.getElementById(id).innerHTML = `${id.charAt(0).toUpperCase() + id.slice(1)}: ${newValue} (${arrow} ${percentChange}%)`;
+
+        return { arrow, change, percentChange };
+    }
+
+    announceBtn.addEventListener('click', () => {
+        announce = true;
+        document.getElementById('announcement').setAttribute('aria-live', 'assertive');
+        document.getElementById('announcement').setAttribute('aria-atomic', 'true');
+        updateButtonText(announceBtn, true);
+        updateButtonText(notAnnounceBtn, false);
+        updateButtonText(setPoliteBtn, false);
+    });
+
+    notAnnounceBtn.addEventListener('click', () => {
+        announce = false;
+        document.getElementById('announcement').removeAttribute('aria-live', 'polite');
+        document.getElementById('announcement').removeAttribute('aria-atomic', 'true');
+        updateButtonText(announceBtn, false);
+        updateButtonText(notAnnounceBtn, true);
+        updateButtonText(setPoliteBtn, false);
+    });
+
+    setPoliteBtn.addEventListener('click', () => {
+        announce = true;
+        document.getElementById('announcement').setAttribute('aria-live', 'polite');
+        document.getElementById('announcement').setAttribute('aria-atomic', 'true');
+        updateButtonText(announceBtn, false);
+        updateButtonText(notAnnounceBtn, false);
+        updateButtonText(setPoliteBtn, true);
+    });
+
+    window.addEventListener('load', () => {
+        document.getElementById('announceText').textContent = '';
+        document.getElementById('notAnnounceText').textContent = '';
+        document.getElementById('setPoliteText').textContent = '';
+    });
+
+    setInterval(updateTicker, 10000); // Update ticker every 5 seconds
+
+    // Initial update
+    updateTicker();
+</script>
+
 </body>
 </html>
