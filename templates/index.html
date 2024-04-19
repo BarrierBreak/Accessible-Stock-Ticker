@@ -162,8 +162,8 @@
 
     announceBtn.addEventListener('click', () => {
         announce = true;
-        document.getElementById('announcement').setAttribute('aria-live', 'assertive');
-        document.getElementById('announcement').setAttribute('aria-atomic', 'true');
+        document.getElementById('stock-ticker').setAttribute('aria-live', 'assertive');
+        document.getElementById('stock-ticker').setAttribute('aria-atomic', 'true');
         updateButtonText(announceBtn, true);
         updateButtonText(notAnnounceBtn, false);
         updateButtonText(setPoliteBtn, false);
@@ -171,8 +171,8 @@
 
     notAnnounceBtn.addEventListener('click', () => {
         announce = false;
-        document.getElementById('announcement').removeAttribute('aria-live', 'polite');
-        document.getElementById('announcement').removeAttribute('aria-atomic', 'true');
+        document.getElementById('stock-ticker').removeAttribute('aria-live', 'polite');
+        document.getElementById('stock-ticker').removeAttribute('aria-atomic', 'true');
         updateButtonText(announceBtn, false);
         updateButtonText(notAnnounceBtn, true);
         updateButtonText(setPoliteBtn, false);
@@ -180,8 +180,8 @@
 
     setPoliteBtn.addEventListener('click', () => {
         announce = true;
-        document.getElementById('announcement').setAttribute('aria-live', 'polite');
-        document.getElementById('announcement').setAttribute('aria-atomic', 'true');
+        document.getElementById('stock-ticker').setAttribute('aria-live', 'polite');
+        document.getElementById('stock-ticker').setAttribute('aria-atomic', 'true');
         updateButtonText(announceBtn, false);
         updateButtonText(notAnnounceBtn, false);
         updateButtonText(setPoliteBtn, true);
