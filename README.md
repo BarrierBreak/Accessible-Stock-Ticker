@@ -13,6 +13,7 @@ The provided accessible stock ticker web application demonstrates several access
 - **Dynamic Content:** Updates stock information dynamically, ensuring timely updates for users.
 - **User Control:** Allows users to customize announcement preferences, enhancing user experience.
 - **Visual Design:** Offers a visually appealing design with good color contrast for readability.
+  
 To further improve accessibility, considerations include keyboard operability, screen reader compatibility, contrast ratios and alternative text for graphics. These enhancements ensure the application is accessible and usable for all users.
 
 ## Keyboard Support
