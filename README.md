@@ -21,8 +21,7 @@ To further improve accessibility, considerations include keyboard operability, s
 |---|---|
 | Tab  |  Navigate between interactive elements in the order they appear in the HTML document. |
 | Shift + Tab  | Navigates to the previous interactive element.|
-|  Down arrow |  Not explicitly defined in the provided code, but typically used to navigate through lists. In this context, they could potentially be used to navigate between different stock information items or buttons.|
-|  Up arrow | When focus is on the accordion button, the focus moves to the previous header.It also reads content inside the previous accordion panel if expanded.|
+|  Up/Down arrow |  Not explicitly defined in the provided code, but typically used to navigate through lists. In this context, they could potentially be used to navigate between different stock information items or buttons.|
 |  Enter or Spacebar | Activate (click) the currently focused button, triggering its associated action. For example, pressing Enter on the "Speak" button announces the stock values audibly.|
 
 ## ARIA Attributes
