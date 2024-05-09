@@ -2,7 +2,7 @@
 ## Introduction
 The accessible stock ticker web application presented here offers updates (not real-time) on stock market data in an accessible and user-friendly format. Designed with inclusivity in mind, this application integrates various accessibility features to ensure that users of all abilities can access and interact with the information effortlessly. From dynamic content updates to customizable announcement preferences, this ticker provides a seamless experience for investors, financial analysts, and anyone interested in staying informed about stock market trends. With its intuitive design and robust accessibility features, this stock ticker sets a new standard for inclusivity in financial data visualization.
 
-![Accessible Stock Ticker](asset/Accessible Stock Ticker.png)
+![Accessible Stock Ticker](assets/Accessible Stock Ticker.png)
 
 ## Accessibility Features
 The provided accessible stock ticker web application demonstrates several accessibility features to ensure usability for a diverse range of users:
