@@ -4,14 +4,22 @@ The accessible stock ticker web component presented here offers updates (not rea
 
 ![Accessible Stock Ticker](https://github.com/BarrierBreak/Accessible-Stock-Ticker/blob/master/assets/Accessible%20Stock%20Ticker.png)
 
+## Features
+- Fetches dummy stock data.
+- Displays the stock data in a ticker format.
+- Allows users to control how the updates are announced:
+    - **Speak**: Announces the updates immediately.
+    - **Speak politely**: Announces the updates politely.
+    - **Don't Speak**: Does not announce the updates.
+
 ## Technologies Used
 The accessible stock ticker web component is built using the following technologies:
-- Languages:
+- **Languages:**
   - HTML5
   - CSS3
   - JavaScript (ES6)
 
-- Frameworks and Libraries:
+- **Frameworks and Libraries:**
   - Flask (Python web framework for backend)
   - Bootstrap (front-end framework for responsive design)
   - jQuery (JavaScript library for DOM manipulation)
@@ -38,33 +46,33 @@ To further improve accessibility, considerations include keyboard operability, s
 
 Follow these steps to set up and use the accessible stock ticker web component:
 
-1. Clone the Repository:
+1. **Clone the Repository:**
 	- Clone this repository to your local machine using git clone [Accessible Stock Ticker](https://github.com/BarrierBreak/Accessible-Stock-Ticker.git).
-2. Install Dependencies:
+2. **Install Dependencies:**
 	- Navigate to the project directory and install the required dependencies for the Flask backend using pip install -r requirements.txt.
-3. Run the Application:
+3. **Run the Application:**
 	- Start the Flask development server by running flask run.
 	- Access the component in your web browser at http://localhost:5000.
-4. Interact with the Ticker:
+4. **Interact with the Ticker:**
 	- Navigate through the stock information using keyboard or mouse.
 	- Customize announcement preferences using the buttons provided.
-5. Explore Accessibility Features:
+5. **Explore Accessibility Features:**
 	- Test keyboard navigation and screen reader compatibility.
 	- Note the dynamic content updates and ARIA attributes used for accessibility.
 
 ## HTML, JavaScript, and Python Components
-	- HTML Components:
- 		- Responsible for defining the structure of the web pages, including headings, lists, buttons, and live regions for dynamic updates.
-   		- Utilizes semantic elements for better accessibility and organization.
-     	- JavaScript Components:
-      		- Handles the dynamic behavior of the component, including fetching and updating stock market data.
-		- Implements event listeners for user interactions, such as button clicks and keyboard inputs.
-  		- Manages functions for updating the ticker content and handling accessibility features.
-    	- Python Components:
-     		- Powers the backend of the component using the Flask web framework.
-       		- Provides routes for serving HTML templates and JSON data.
-	 	- Defines the business logic for retrieving stock data and formatting it for consumption by the frontend.
-   		- Utilizes Flask's routing mechanism to handle client requests and responses.
+- **HTML Components:**
+	- Responsible for defining the structure of the web pages, including headings, lists, buttons, and live regions for dynamic updates.
+	- Utilizes semantic elements for better accessibility and organization.
+- **JavaScript Components:**
+	- Handles the dynamic behavior of the component, including fetching and updating stock market data.
+	- Implements event listeners for user interactions, such as button clicks and keyboard inputs.
+	- Manages functions for updating the ticker content and handling accessibility features.
+- **Python Components:**
+	- Powers the backend of the component using the Flask web framework.
+	- Provides routes for serving HTML templates and JSON data.
+	- Defines the business logic for retrieving stock data and formatting it for consumption by the frontend.
+	- Utilizes Flask's routing mechanism to handle client requests and responses.
 
 ## Future Improvements
 - Real-time data updates from an external API.
@@ -84,7 +92,6 @@ Follow these steps to set up and use the accessible stock ticker web component:
 |  aria-label |  Provides a text label for the <svg> graphic.|
 |  aria-live |  Indicates that the element's content (the stock ticker) is live and should be announced to the user, even if they are in the middle of using a screen reader. It ensures that users receive real-time updates without having to refresh the page.|
 |  aria-atomic | Specifies that the entire contents of the live region (stock ticker) should be announced when any part of it changes. This attribute ensures that screen reader users receive complete and coherent updates, even if only a portion of the content changes.|
-|  aria-hidden | Indicates that the element (such as the up green and down red arrows used for visual representation) is not relevant or meaningful for screen reader users. It ensures that screen readers ignore these elements, preventing them from being announced redundantly.|
 	
 ## Browser and Screen reader Support
 
