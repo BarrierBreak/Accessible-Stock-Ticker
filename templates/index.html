@@ -41,13 +41,20 @@
         }
         svg {
             width: 20%;
+            padding-bottom: 2%;
         }
-        
+        @media (max-width: 768px) {
+        svg {
+            width: 80%;
+            padding-bottom: 10%;
+        }
+}
     </style>
 </head>
 <body>
+
     <div class="container mt-5">
-        <a href="https://www.barrierbreak.com/" target="_blank" rel="noopener noreferrer">
+        <a class="logo" href="https://www.barrierbreak.com/" target="_blank" rel="noopener noreferrer">
             <svg role="img" aria-label="BarrierBreak" width="575" height="145" viewBox="0 0 575 145" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M67.5201 111.12V122.31H77.5101V111.12C77.5101 97.53 81.7301 91.13 120.21 91.13H142.01C133.89 121.86 105.9 144.52 72.6001 144.52C39.3001 144.52 11.0801 121.67 3.09006 90.75H65.6801V80.76H1.26006C0.960056 78.12 0.810059 75.44 0.810059 72.74C0.810059 70.04 0.960056 67.35 1.26006 64.72H24.7001C44.9601 64.72 56.4201 63.09 64.2701 59.1C73.2101 54.56 77.3801 46.82 77.3801 34.74V23.54H67.3901V34.74C67.3901 48.32 63.1701 54.73 24.7001 54.73H3.09006C11.0801 23.8 39.1701 0.959961 72.6001 0.959961C106.03 0.959961 134.35 23.98 142.2 55.1H79.2201V65.09H143.98C144.25 67.61 144.39 70.16 144.39 72.74C144.39 75.59 144.22 78.39 143.9 81.14H120.21C85.2701 81.14 67.5201 85.78 67.5201 111.12Z" fill="#EF6F22"/>
                 <path d="M192.91 48.7998C201.39 48.7998 209.19 51.3498 209.19 60.8798C209.19 66.2798 206.11 69.8098 201.69 71.6798C207.92 72.9598 211.67 77.0098 211.67 83.6098C211.67 93.3598 204.92 98.6898 192.46 98.6898H176.03V48.7998H192.91ZM199.82 62.2998C199.82 56.8198 196.22 55.6998 191.34 55.6998H185.19V69.1998H190.82C197.2 69.1998 199.82 66.2698 199.82 62.2998ZM201.99 83.6798C201.99 78.6498 198.54 75.8798 192.61 75.8798H185.18V91.6298H192.31C199.66 91.6298 201.99 88.2498 201.99 83.6798Z" fill="#333333"/>
@@ -65,7 +72,7 @@
             </svg>
         </a>
         <h1>Accessible Stock Ticker</h1>
-        <div id="stock-ticker">
+        <div id="stock-ticker" role="region">
             <ul class="stock-ticker-list">
                 <li>
                     <div id="nifty-bank" class="stock-info">Nifty-bank: 35000</div>
@@ -104,7 +111,6 @@
     
         <!-- ARIA live region for screen reader announcements -->
         <div id="announcement" class="mt-3 visually-hidden" aria-hidden="true"></div>
-        © 2024 BarrierBreak Solutions Pvt. Ltd. All Rights Reserved.
     </div>
 
 <script>
