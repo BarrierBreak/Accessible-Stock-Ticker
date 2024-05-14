@@ -230,19 +230,19 @@
     function announceStockValues(data, arrowNiftyBank, arrowSensex, arrowNifty50) {
         let announcement = '';
         if (arrowNiftyBank.change === 'Increasing') {
-            announcement += ` Nifty Bank ${data.nifty_bank} ${arrowNiftyBank.percentChange}% `;
+            announcement += ` Nifty Bank ${data.nifty_bank} +${arrowNiftyBank.percentChange}% `;
         } else if (arrowNiftyBank.change === 'Decreasing') {
             announcement += ` Nifty Bank ${data.nifty_bank} ${arrowNiftyBank.percentChange}% `;
         }
 
         if (arrowSensex.change === 'Increasing') {
-            announcement += ` Sensex ${data.sensex} ${arrowSensex.percentChange}% `;
+            announcement += ` Sensex ${data.sensex} +${arrowSensex.percentChange}% `;
         } else if (arrowSensex.change === 'Decreasing') {
             announcement += ` Sensex ${data.sensex} ${arrowSensex.percentChange}% `;
         }
 
         if (arrowNifty50.change === 'Increasing') {
-            announcement += ` Nifty 50 ${data.nifty_50} ${arrowNifty50.percentChange}% `;
+            announcement += ` Nifty 50 ${data.nifty_50} +${arrowNifty50.percentChange}% `;
         } else if (arrowNifty50.change === 'Decreasing') {
             announcement += ` Nifty 50 ${data.nifty_50} ${arrowNifty50.percentChange}% `;
         }
@@ -265,8 +265,8 @@
 
     announceBtn.addEventListener('click', () => {
         announce = true;
-        document.getElementById('stock-ticker').setAttribute('aria-live', 'assertive');
-        document.getElementById('stock-ticker').setAttribute('aria-atomic', 'true');
+        document.getElementById('announcement').setAttribute('aria-live', 'assertive');
+        document.getElementById('announcement').setAttribute('aria-atomic', 'true');
         updateButtonText(announceBtn, true);
         updateButtonText(notAnnounceBtn, false);
         updateButtonText(setPoliteBtn, false);
@@ -277,8 +277,8 @@
 
     notAnnounceBtn.addEventListener('click', () => {
         announce = false;
-        document.getElementById('stock-ticker').removeAttribute('aria-live', 'polite');
-        document.getElementById('stock-ticker').removeAttribute('aria-atomic', 'true');
+        document.getElementById('announcement').removeAttribute('aria-live', 'polite');
+        document.getElementById('announcement').removeAttribute('aria-atomic', 'true');
         updateButtonText(announceBtn, false);
         updateButtonText(notAnnounceBtn, true);
         updateButtonText(setPoliteBtn, false);
@@ -289,8 +289,8 @@
 
     setPoliteBtn.addEventListener('click', () => {
         announce = true;
-        document.getElementById('stock-ticker').setAttribute('aria-live', 'polite');
-        document.getElementById('stock-ticker').setAttribute('aria-atomic', 'true');
+        document.getElementById('announcement').setAttribute('aria-live', 'polite');
+        document.getElementById('announcement').setAttribute('aria-atomic', 'true');
         updateButtonText(announceBtn, false);
         updateButtonText(notAnnounceBtn, false);
         updateButtonText(setPoliteBtn, true);
@@ -307,7 +307,7 @@
 
     setInterval(updateTicker, 12000); // Update ticker every 5 seconds
 
-    // Initial update
+    // Initial update final code
     updateTicker();
 </script>
 
