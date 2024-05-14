@@ -237,7 +237,7 @@
         }
 
         const percentChange = ((newValue - prevValue) / prevValue * 100).toFixed(2);
-        const arrow = newValue > prevValue ? '<span role="img" aria-label="Increase" class="up-arrow">&#x25B2;</span>' : '<span role="img" aria-label="Decrease" class="down-arrow">&#x25BC;</span>';
+        const arrow = newValue > prevValue ? '<span aria-hidden="true" class="up-arrow">&#x25B2;</span>' : '<span aria-hidden="true" class="down-arrow">&#x25BC;</span>';
         const change = newValue > prevValue ? 'Increasing' : 'Decreasing';
         const formattedPercentChange = newValue > prevValue ? `+${percentChange}` : percentChange;
         document.getElementById(id).innerHTML = `${id.charAt(0).toUpperCase() + id.slice(1)}: ${newValue} (${arrow} ${formattedPercentChange}%)`;
