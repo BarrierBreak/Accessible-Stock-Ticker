@@ -8,7 +8,8 @@ app = Flask(__name__)
 dummy_data = [
     {"nifty_bank": 35000, "sensex": 50000, "nifty_50": 15000},
     {"nifty_bank": 35200, "sensex": 48000, "nifty_50": 15100},
-    {"nifty_bank": 34800, "sensex": 49800, "nifty_50": 10000}
+    {"nifty_bank": 34800, "sensex": 49800, "nifty_50": 10000},
+    {"nifty_bank": 34400, "sensex": 49860, "nifty_50": 12000}
 ]
 
 @app.route('/')

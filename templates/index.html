@@ -27,6 +27,12 @@
         #setPoliteBtn:focus {
             border: 2px solid black;
         }
+        #pauseBtn:focus {
+            border: 2px solid black;
+        }
+        #resumeBtn:focus {
+            border: 2px solid black;
+        }
         .container{
             text-align: center;
         }
@@ -89,6 +95,18 @@
         <div class="mt-4">
             <ul class="stock-ticker-list">
                 <li>
+                    <button id="pauseBtn" class="btn btn-warning me-2">
+                        Pause
+                        <span id="pauseText" class="visually-hidden"></span>
+                    </button>
+                </li>
+                <li>
+                    <button id="resumeBtn" class="btn btn-success me-2">
+                        Resume
+                        <span id="resumeText" class="visually-hidden"></span>
+                    </button>
+                </li>
+                <li>
                     <button id="announceBtn" class="btn btn-primary me-2">
                         Speak
                         <span id="announceText" class="visually-hidden">Selected</span>
@@ -139,6 +157,7 @@
 
 
     function updateTicker() {
+        if (!autoUpdateEnabled) return;
         fetch('/get_data')
             .then(response => response.json())
             .then(data => {
@@ -228,6 +247,7 @@
         updateButtonText(announceBtn, true);
         updateButtonText(notAnnounceBtn, false);
         updateButtonText(setPoliteBtn, false);
+        pauseBtn.style.textDecoration = 'none';
         announceBtn.style.textDecoration = 'underline'; // Add underline to the button text
         notAnnounceBtn.style.textDecoration = 'none'; // Remove underline from other buttons
         setPoliteBtn.style.textDecoration = 'none';
@@ -240,6 +260,7 @@
         updateButtonText(announceBtn, false);
         updateButtonText(notAnnounceBtn, true);
         updateButtonText(setPoliteBtn, false);
+        pauseBtn.style.textDecoration = 'none';
         announceBtn.style.textDecoration = 'none';
         notAnnounceBtn.style.textDecoration = 'underline';
         setPoliteBtn.style.textDecoration = 'none';
@@ -252,6 +273,7 @@
         updateButtonText(announceBtn, false);
         updateButtonText(notAnnounceBtn, false);
         updateButtonText(setPoliteBtn, true);
+        pauseBtn.style.textDecoration = 'none';
         announceBtn.style.textDecoration = 'none';
         notAnnounceBtn.style.textDecoration = 'none';
         setPoliteBtn.style.textDecoration = 'underline';
@@ -263,10 +285,46 @@
         document.getElementById('setPoliteText').textContent = '';
     });
 
-    setInterval(updateTicker, 12000); // Update ticker every 5 seconds
+    let autoUpdateEnabled = true;
+
+    function pauseAutoUpdate() {
+        clearInterval(autoUpdateInterval);
+        autoUpdateEnabled = false; // Stop auto-updating
+        updateButtonText(pauseBtn, true);
+        updateButtonText(resumeBtn, false);
+        updateButtonText(announceBtn, false);
+        updateButtonText(notAnnounceBtn, false);
+        updateButtonText(setPoliteBtn, false);
+        pauseBtn.style.textDecoration = 'underline';
+        resumeBtn.style.textDecoration = 'none';
+        announceBtn.style.textDecoration = 'none';
+        notAnnounceBtn.style.textDecoration = 'none';
+        setPoliteBtn.style.textDecoration = 'none';
+    }
+
+    function resumeAutoUpdate() {
+        autoUpdateInterval = setInterval(updateTicker, 12000); // Restart auto-update
+        autoUpdateEnabled = true; // Resume auto-updating
+        updateTicker(); // Update immediately after resuming
+        updateButtonText(resumeBtn, true);
+        resumeBtn.style.textDecoration = 'underline';
+    }
+
+    const pauseBtn = document.getElementById('pauseBtn');
+    const resumeBtn = document.getElementById('resumeBtn');
+
+    pauseBtn.addEventListener('click', pauseAutoUpdate);
+    resumeBtn.addEventListener('click', resumeAutoUpdate);
+
+    function updateButtonText(button, selected) {
+        const hiddenText = button.querySelector('.visually-hidden');
+        hiddenText.textContent = selected ? 'Selected' : '';
+    }
+
+    //setInterval(updateTicker, 12000); // Update ticker every 5 seconds
 
     // Initial update
-    updateTicker();
+    resumeAutoUpdate();
 </script>
 
 </body>
