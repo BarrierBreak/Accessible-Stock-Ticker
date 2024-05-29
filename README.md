@@ -1,13 +1,13 @@
 # Accessible Stock Ticker
 ## Introduction
-The accessible stock ticker web component presented here offers updates (not real-time) on stock market data in an accessible and user-friendly format. Designed with inclusivity in mind, this component integrates various accessibility features to ensure that users of all abilities can access and interact with the information effortlessly. From dynamic content updates to customizable announcement preferences, this ticker provides a seamless experience for assistive technology users interested in staying informed about stock market trends. With its intuitive design and robust accessibility features, this stock ticker showcases that dynamically updating stock prize information can be made accessible for assistive technology users.
+The accessible stock ticker web component presented here offers updates (not real-time) on stock market data in an accessible and user-friendly format. Designed with inclusivity in mind, this component integrates various accessibility features to ensure that users of all abilities can access and interact with the information effortlessly. From dynamic content updates to customizable announcement preferences, this ticker provides a seamless experience for assistive technology users interested in staying informed about stock market trends. With its intuitive design and robust accessibility features, this stock ticker showcases that dynamically updating stock price information can be made accessible for assistive technology users.
 
 ![Accessible Stock Ticker](https://github.com/BarrierBreak/Accessible-Stock-Ticker/blob/master/assets/Accessible%20Stock%20Ticker.png)
 
 ## Features
 - Fetches dummy stock data.
 - Displays the stock data in a ticker format.
-- Allows users to control how the updates are announced:
+- Allows screen reader users to control how the updates are announced:
     - **Speak**: Announces the updates immediately as and when they happen..
     - **Speak politely**: Announces the updates when the user is inactive and thereby does not interrupt their reading experience.
     - **Don't Speak**: Does not announce the updates.
@@ -20,7 +20,7 @@ The provided accessible stock ticker web component demonstrates several accessib
 - **Focus Styles:** Implements clear focus styles for improved keyboard navigation.
 - **Dynamic Updates:** Users get access to the dynamically updating information.
 - **User Control:** Allows users to customize announcement preferences, enhancing user experience.
-- **Visual Design:** Offers a visually appealing design with good color contrast for readability.
+- **Visual Design:** Offers a visually appealing design with good color contrast for readability and facilitate visual identification of stock trends and button states.
 
 ## Keyboard Support
 |  Key |  Function|
@@ -33,9 +33,9 @@ The provided accessible stock ticker web component demonstrates several accessib
 
 | Attributes  |  Description |
 |---|---|
-|  aria-label |  Provides textual description for logo image and info icon.|
+|  aria-label |  Provides textual description for SVG logo image and info icon.|
 |  aria-live |  Makes dynamic updates available for assistive technology users.|
-|  aria-atomic | Specified for the  <div> container that includes dynamically updating content.|
+|  aria-atomic | Specified for the container that includes dynamically updating content.|
 	
 ## Browser and Screen reader Support
 
