@@ -221,9 +221,9 @@
         }
 
         function displayStockInfo(id, value, percentageChange, arrow) {
-            const element = document.getElementById(id);
+            const indexName = id.replace('-', ' ').replace(/\b\w/g, firstLetter => firstLetter.toUpperCase());
             const formattedPercentageChange = percentageChange > 0 ? `+${percentageChange}` : percentageChange;
-            element.innerHTML = `${id.charAt(0).toUpperCase() + id.slice(1)}: ${value} (${arrow} ${formattedPercentageChange}%)`;
+            document.getElementById(id).innerHTML = `${indexName}: ${value} (${arrow} ${formattedPercentageChange}%)`;
         }
 
 
