@@ -301,7 +301,8 @@
 
     window.addEventListener('load', () => {
         document.getElementById('announceText').textContent = '';
-        document.getElementById('notAnnounceText').textContent = '';
+        document.getElementById('notAnnounceText').textContent = 'Selected';
+        notAnnounceBtn.style.textDecoration = 'underline';
         document.getElementById('setPoliteText').textContent = '';
     });
 
