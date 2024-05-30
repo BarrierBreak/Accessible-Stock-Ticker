@@ -232,19 +232,19 @@
         if (arrowNiftyBank.change === 'Increasing') {
             announcement += ` Nifty Bank ${data.nifty_bank} &plus;${arrowNiftyBank.percentChange}% `;
         } else if (arrowNiftyBank.change === 'Decreasing') {
-            announcement += ` Nifty Bank ${data.nifty_bank} ${arrowNiftyBank.percentChange}% `;
+            announcement += ` Nifty Bank ${data.nifty_bank} ${arrowNiftyBank.percentChange.replace('-', '&minus;')}% `;
         }
 
         if (arrowSensex.change === 'Increasing') {
             announcement += ` Sensex ${data.sensex} &plus;${arrowSensex.percentChange}% `;
         } else if (arrowSensex.change === 'Decreasing') {
-            announcement += ` Sensex ${data.sensex} ${arrowSensex.percentChange}% `;
+            announcement += ` Sensex ${data.sensex} ${arrowSensex.percentChange.replace('-', '&minus;')}% `;
         }
 
         if (arrowNifty50.change === 'Increasing') {
             announcement += ` Nifty 50 ${data.nifty_50} &plus;${arrowNifty50.percentChange}% `;
         } else if (arrowNifty50.change === 'Decreasing') {
-            announcement += ` Nifty 50 ${data.nifty_50} ${arrowNifty50.percentChange}% `;
+            announcement += ` Nifty 50 ${data.nifty_50} ${arrowNifty50.percentChange.replace('-', '&minus;')}% `;
         }
 
         document.getElementById('announcement').textContent = announcement.trim();
